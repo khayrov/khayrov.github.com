@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Knockout + File API</title>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js "></script>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.1.0.js"></script>
+
+        <script type="text/javascript" src="ko_file.js"></script>
+        <style type="text/css">
+            img.thumb {
+                max-width: 100px;
+                max-height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <button type="button" data-bind="click: addSlot">Add slot</button>
+        <div data-bind="foreach: { data: images, beforeRemove: beforeRemoveSlot }">
+            <div>
+                <input type="file" accept="image/*" data-bind="file: imageFile, fileObjectURL: imageObjectURL, fileBinaryData: imageBinary"/>
+                <div data-bind="if: imageObjectURL">
+                    <img class="thumb" data-bind="attr: { src: imageObjectURL }"/>
+                </div>
+                <div>Size: <span data-bind="text: fileSize"></span>&nbsp;bytes</div>
+                <div>First 10 bytes: <span data-bind="text: firstBytes"></span></div>
+                <button type="button" data-bind="click: $parent.removeSlot">Remove</button>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            ko.applyBindings(imageListModel);
+        </script>
+    </body>
+</html>
