@@ -30,7 +30,7 @@ ko.bindingHandlers.file = {
                 reader.onload = function(e) {
                     bindings.fileBinaryData(e.target.result);
                 };
-                reader.readAsArrayBuffer(file);
+                reader.readAsBinaryString(file);
             }
         }
     }
